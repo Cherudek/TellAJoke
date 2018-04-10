@@ -6,6 +6,7 @@ public class MyJokes {
 
     return "Of course I should clean my windows. But privacy is important too.";
 
+
   }
 
 }

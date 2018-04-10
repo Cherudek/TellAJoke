@@ -1,16 +1,19 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
+import com.example.androiddisplayjokeslibrary.DisplayJokeActivity;
 import com.example.javajokelibrary.MyJokes;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private String MAIN_ACTIVITY_LOG_TAG = MainActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         MyJokes myJoke = new MyJokes();
         String joke = myJoke.tellAHandCraftedJoke();
-        TextView tvMyFirstJoke = findViewById(R.id.my_first_joke);
-        tvMyFirstJoke.setText(joke);
-
-
+        Log.i(MAIN_ACTIVITY_LOG_TAG, "My Joke is: " + joke);
+        Intent intentToStartDisplayActivity = new Intent(this, DisplayJokeActivity.class);
+        intentToStartDisplayActivity.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, joke);
+        startActivity(intentToStartDisplayActivity);
     }
-
-
 }

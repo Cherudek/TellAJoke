@@ -23,17 +23,6 @@
       android:onClick="tellJoke"
       android:text="@string/button_text" />
 
-    <TextView
-      android:paddingTop="16dp"
-      tools:text="Hello"
-      android:textSize="22sp"
-      android:textStyle="bold"
-      android:id="@+id/my_first_joke"
-      android:layout_below="@+id/btn_tell_joke"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"/>
-
-
 
     <com.google.android.gms.ads.AdView
 
