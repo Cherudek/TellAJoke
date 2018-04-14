@@ -57,4 +57,6 @@ public class MainActivity extends AppCompatActivity {
         intentToStartDisplayActivity.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, joke);
         startActivity(intentToStartDisplayActivity);
     }
+
+
 }
