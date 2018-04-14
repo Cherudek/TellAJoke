@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
 
@@ -40,18 +42,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    public void tellJoke(View view) {
-//        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
-//    }
+    public void tellJoke(View view) {
 
-    public void tellJoke(View view){
+        EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask();
 
-        new EndpointsAsyncTask().doInBackground();
+        endpointsAsyncTask.execute();
 
-//        Intent intentToStartDisplayActivity = new Intent(this, DisplayJokeActivity.class);
-//        intentToStartDisplayActivity.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, joke);
-//        startActivity(intentToStartDisplayActivity);
+        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
     }
-
 
 }

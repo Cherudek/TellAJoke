@@ -1,9 +1,11 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
-import android.widget.Toast;
+import android.util.Log;
+import com.example.androiddisplayjokeslibrary.DisplayJokeActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -16,10 +18,12 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
   public static final String TAG = EndpointsAsyncTask.class.getCanonicalName();
 
   private static MyApi myApiService = null;
-  private Context context;
+
+  private Context mContext;
 
   @Override
   protected String doInBackground(Pair<Context, String>... params) {
+
     if (myApiService == null) {  // Only do this once
       MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
           new AndroidJsonFactory(), null)
@@ -38,11 +42,11 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
       myApiService = builder.build();
     }
 
-    context = params[0].first;
-    String name = params[0].second;
-
     try {
-      return myApiService.sayHi(name).execute().getData();
+      String joke = String.valueOf(myApiService.sayHi().execute().getData());
+      Log.i(TAG, " TEST**** The Joke Retrived is: " + joke);
+
+      return joke;
     } catch (IOException e) {
       return e.getMessage();
     }
@@ -50,11 +54,13 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
   @Override
   protected void onPostExecute(String result) {
-    Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+    Intent intent = new Intent();
+    intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, result);
+
+    Log.i(TAG, " TEST**** The Joke Retrived is: " + result);
+
+
   }
 
-  @Override
-  protected void onPreExecute() {
-    super.onPreExecute();
-  }
 }
