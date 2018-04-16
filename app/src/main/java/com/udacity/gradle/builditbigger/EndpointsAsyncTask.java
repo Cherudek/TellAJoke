@@ -1,9 +1,13 @@
 package com.udacity.gradle.builditbigger;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
 import android.util.Log;
+import com.example.androiddisplayjokeslibrary.DisplayJokeActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -11,14 +15,15 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 import java.io.IOException;
 
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> implements
+    MainActivity.asyncTaskCallback {
 
-  public static final String TAG = EndpointsAsyncTask.class.getCanonicalName();
+  public static final String LOG_TAG = EndpointsAsyncTask.class.getCanonicalName();
 
   private static MyApi myApiService = null;
 
-  private String mResult;
-  private asyncTaskCallback mCallbackHostActivity;
+  private Context mContext;
+  private String mJoke;
 
   @Override
   protected String doInBackground(Pair<Context, String>... params) {
@@ -55,22 +60,21 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
   @Override
   protected void onPostExecute(final String mResult) {
 
-    Log.i(TAG, " TEST**** The Joke Retrieved is: " + mResult);
+    mJoke = mResult;
 
-    mCallbackHostActivity = new asyncTaskCallback() {
-      @Override
-      public void callBackCall(String myJoke) {
-
-      }
-    };
+    Log.i(LOG_TAG, " TEST **** The Joke Retrieved is: " + mResult);
 
 
   }
 
-  public interface asyncTaskCallback {
 
-    void callBackCall(String myJoke);
+  @Override
+  public void callBackCall(Context context) {
+    mContext = context;
+
+    Intent intent = new Intent(mContext, DisplayJokeActivity.class);
+    intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, mJoke);
+    mContext.startActivity(intent);
 
   }
-
 }
