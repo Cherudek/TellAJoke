@@ -1,26 +1,27 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import com.example.androiddisplayjokeslibrary.DisplayJokeActivity;
+import com.udacity.gradle.builditbigger.EndpointsAsyncTask.AsyncTaskCallback;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+    EndpointsAsyncTask.AsyncTaskCallback {
 
     private String MAIN_ACTIVITY_LOG_TAG = MainActivity.class.getName();
 
-    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mContext = getApplicationContext();
 
     }
 
@@ -47,6 +48,22 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    AsyncTaskCallback asyncTaskCallback = new AsyncTaskCallback() {
+        @Override
+        public void callBack(String joke) {
+
+        }
+    };
+
+    @Override
+    public void callBack(String joke) {
+
+        Intent intent = new Intent(this, DisplayJokeActivity.class);
+        intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, joke);
+        this.startActivity(intent);
+
+        Log.i(MAIN_ACTIVITY_LOG_TAG, "TEST *** The Joke is: " + joke);
+    }
 
     public void tellJoke(View view) {
 
@@ -56,12 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, "The joke is on its way hold on tight!", Toast.LENGTH_SHORT)
             .show();
+
+
     }
 
 
-    public interface asyncTaskCallback {
-
-        void callBackCall(Context context);
-
-    }
 }

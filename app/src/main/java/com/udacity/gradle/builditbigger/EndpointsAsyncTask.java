@@ -1,13 +1,9 @@
 package com.udacity.gradle.builditbigger;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
 import android.util.Log;
-import com.example.androiddisplayjokeslibrary.DisplayJokeActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -15,18 +11,24 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 import java.io.IOException;
 
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> implements
-    MainActivity.asyncTaskCallback {
+class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
 
   public static final String LOG_TAG = EndpointsAsyncTask.class.getCanonicalName();
 
   private static MyApi myApiService = null;
 
-  private Context mContext;
+  private AsyncTaskCallback mAsyncCallBack;
   private String mJoke;
 
   @Override
   protected String doInBackground(Pair<Context, String>... params) {
+
+    mAsyncCallBack = new AsyncTaskCallback() {
+      @Override
+      public void callBack(String joke) {
+
+      }
+    };
 
     if (myApiService == null) {  // Only do this once
       MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
@@ -48,7 +50,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     try {
       String joke = String.valueOf(myApiService.sayHi().execute().getData());
-      Log.i(TAG, " TEST**** The Joke Retrieved is: " + joke);
+      Log.i(LOG_TAG, " TEST**** The Joke Retrieved is: " + joke);
 
       return joke;
     } catch (IOException e) {
@@ -56,26 +58,27 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     }
   }
 
-  @Override
-  public void callBackCall(Context context) {
-    mContext = context;
 
-    Intent intent = new Intent(mContext, DisplayJokeActivity.class);
-    intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, mJoke);
-    mContext.startActivity(intent);
-
-  }
 
 
   @Override
   protected void onPostExecute(final String mResult) {
 
-    mJoke = mResult;
+    mAsyncCallBack.callBack(mResult);
+
 
     Log.i(LOG_TAG, " TEST **** The Joke Retrieved is: " + mResult);
 
 
   }
+
+  public interface AsyncTaskCallback {
+
+    void callBack(String joke);
+
+  }
+
+
 
 
 
