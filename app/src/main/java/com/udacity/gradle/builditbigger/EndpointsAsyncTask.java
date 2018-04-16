@@ -56,6 +56,16 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     }
   }
 
+  @Override
+  public void callBackCall(Context context) {
+    mContext = context;
+
+    Intent intent = new Intent(mContext, DisplayJokeActivity.class);
+    intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, mJoke);
+    mContext.startActivity(intent);
+
+  }
+
 
   @Override
   protected void onPostExecute(final String mResult) {
@@ -68,13 +78,5 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
   }
 
 
-  @Override
-  public void callBackCall(Context context) {
-    mContext = context;
 
-    Intent intent = new Intent(mContext, DisplayJokeActivity.class);
-    intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, mJoke);
-    mContext.startActivity(intent);
-
-  }
 }
