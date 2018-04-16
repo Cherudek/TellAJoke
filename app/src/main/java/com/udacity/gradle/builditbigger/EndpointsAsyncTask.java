@@ -44,7 +44,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     try {
       String joke = String.valueOf(myApiService.sayHi().execute().getData());
-      Log.i(TAG, " TEST**** The Joke Retrived is: " + joke);
+      Log.i(TAG, " TEST**** The Joke Retrieved is: " + joke);
 
       return joke;
     } catch (IOException e) {
@@ -55,10 +55,11 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
   @Override
   protected void onPostExecute(String result) {
 
-    Intent intent = new Intent();
+    Intent intent = new Intent(mContext, DisplayJokeActivity.class);
     intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, result);
+    mContext.startActivity(intent);
 
-    Log.i(TAG, " TEST**** The Joke Retrived is: " + result);
+    Log.i(TAG, " TEST**** The Joke Retrieved is: " + result);
 
 
   }
