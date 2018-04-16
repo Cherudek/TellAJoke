@@ -1,9 +1,11 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
 import android.util.Log;
+import com.example.androiddisplayjokeslibrary.DisplayJokeActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -19,16 +21,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
   private AsyncTaskCallback mAsyncCallBack;
   private String mJoke;
+  public Context mContext;
 
   @Override
   protected String doInBackground(Pair<Context, String>... params) {
-
-    mAsyncCallBack = new AsyncTaskCallback() {
-      @Override
-      public void callBack(String joke) {
-
-      }
-    };
 
     if (myApiService == null) {  // Only do this once
       MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
@@ -58,16 +54,20 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     }
   }
 
+  public EndpointsAsyncTask(Context context) {
+    this.mContext = context;
 
-
+  }
 
   @Override
   protected void onPostExecute(final String mResult) {
 
-    mAsyncCallBack.callBack(mResult);
-
-
     Log.i(LOG_TAG, " TEST **** The Joke Retrieved is: " + mResult);
+
+    Intent intent = new Intent(mContext, DisplayJokeActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, mResult);
+    mContext.startActivity(intent);
 
 
   }
