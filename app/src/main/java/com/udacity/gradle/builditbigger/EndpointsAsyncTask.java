@@ -32,7 +32,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
           // options for running against local devappserver
           // - 10.0.2.2 is localhost's IP address in Android emulator
           // - turn off compression when running against local devappserver
-          .setRootUrl("http://10.0.2.2:8080/_ah/api/")
+          .setRootUrl("http://172.29.0.109:8888/_ah/api/")
           .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
             @Override
             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) {
@@ -65,11 +65,9 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     Log.i(LOG_TAG, " TEST **** The Joke Retrieved is: " + mResult);
 
     Intent intent = new Intent(mContext, DisplayJokeActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, mResult);
     mContext.startActivity(intent);
-
-
   }
 
   public interface AsyncTaskCallback {
