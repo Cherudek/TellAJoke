@@ -33,7 +33,7 @@ public class MyEndpoint {
     public MyBean sayHi() {
 
         MyBean response = new MyBean();
-      response.setData("Hi, " + myJoke.tellAHandCraftedJoke());
+      response.setData(myJoke.tellAHandCraftedJoke());
         return response;
     }
 
