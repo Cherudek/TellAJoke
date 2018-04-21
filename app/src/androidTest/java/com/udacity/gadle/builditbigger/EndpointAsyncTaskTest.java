@@ -6,6 +6,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.not;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -36,6 +37,8 @@ public class EndpointAsyncTaskTest {
     onView(withId(R.id.btn_tell_joke)).perform(click());
 
     onView(withId(R.id.my_first_joke)).check(matches(withText(joke)));
+
+    onView(withId(R.id.my_first_joke)).check(matches(not(withText(""))));
 
 
   }
