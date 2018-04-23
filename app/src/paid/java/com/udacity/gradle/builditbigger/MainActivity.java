@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 import com.example.androiddisplayjokeslibrary.DisplayJokeActivity;
 import com.udacity.gradle.builditbigger.EndpointsAsyncTask.AsyncTaskCallback;
 
@@ -66,18 +64,6 @@ public class MainActivity extends AppCompatActivity implements
     asyncTaskCallback.callBack(joke);
 
     Log.i(MAIN_ACTIVITY_LOG_TAG, "TEST *** The Joke is: " + joke);
-
-
-  }
-
-  public void tellJoke(View view) {
-
-    EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(mContext);
-
-    endpointsAsyncTask.execute();
-
-    Toast.makeText(this, "The joke is on its way hold on tight!", Toast.LENGTH_SHORT)
-        .show();
 
 
   }

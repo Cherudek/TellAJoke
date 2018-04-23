@@ -10,17 +10,23 @@
     tools:context=".MainActivityFragment">
 
     <TextView
+      android:layout_marginTop="36dp"
+      android:layout_centerHorizontal="true"
+      android:gravity="center"
         android:id="@+id/instructions_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/instructions" />
+      android:text="@string/instructions"
+      android:textSize="24sp"/>
 
     <Button
+      android:layout_marginTop="36dp"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
       android:id="@+id/btn_tell_joke"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_below="@+id/instructions_text_view"
-      android:onClick="tellJoke"
       android:text="@string/button_text" />
 
     <ProgressBar
@@ -29,11 +35,10 @@
       android:layout_height="wrap_content"
       android:layout_below="@+id/btn_tell_joke"
       android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
       android:visibility="invisible"/>
 
-
     <com.google.android.gms.ads.AdView
-
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -16,7 +16,7 @@ import com.google.android.gms.ads.MobileAds;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements OnClickListener {
+public class MainActivityFragment extends Fragment {
 
     public View root;
     private ProgressBar progressBar;
@@ -30,8 +30,6 @@ public class MainActivityFragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_main, container, false);
-
-        progressBar = new ProgressBar(root.getContext());
 
         progressBar = root.findViewById(R.id.progress_bar);
         button = root.findViewById(R.id.btn_tell_joke);
@@ -61,20 +59,10 @@ public class MainActivityFragment extends Fragment implements OnClickListener {
 
                 endpointsAsyncTask.execute();
 
-//                Toast.makeText(getContext(), "The joke is on its way hold on tight!", Toast.LENGTH_SHORT)
-//                    .show();
-
             }
         });
 
         return root;
-
-    }
-
-
-    @Override
-    public void onClick(View v) {
-
 
     }
 
