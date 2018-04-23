@@ -23,3 +23,5 @@ Apr 21, 2018 7:55:17 PM com.google.appengine.repackaged.com.google.protobuf.Unsa
 WARNING: platform method missing - proto runtime falling back to safer methods: java.security.AccessControlException: access denied ("java.lang.RuntimePermission" "accessClassInPackage.sun.misc")
 Apr 21, 2018 7:55:17 PM com.google.appengine.repackaged.com.google.protobuf.UnsafeUtil supportsUnsafeArrayOperations
 WARNING: platform method missing - proto runtime falling back to safer methods: java.security.AccessControlException: access denied ("java.lang.RuntimePermission" "accessClassInPackage.sun.misc")
+Apr 21, 2018 8:20:45 PM com.google.appengine.tools.development.LocalResourceFileServlet doGet
+WARNING: No file found for: /favicon.ico

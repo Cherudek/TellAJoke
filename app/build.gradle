@@ -31,6 +31,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "tier"
+    productFlavors {
+        free {
+            applicationId 'com.udacity.gradle.builditbigger.free'
+            dimension "tier"
+
+        }
+
+        paid {
+            applicationId 'com.udacity.gradle.builditbigger.paid'
+            dimension "tier"
+
+        }
+    }
     sourceSets { main { java.srcDirs = ['src/main/java', 'src/androidTest/java/AsyncTaskTest'] } }
 }
 

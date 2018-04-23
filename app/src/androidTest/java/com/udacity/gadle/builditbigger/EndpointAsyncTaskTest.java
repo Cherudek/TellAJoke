@@ -22,7 +22,6 @@ public class EndpointAsyncTaskTest {
 
   private static final String joke = "Of course I should clean my windows. But privacy is important too.";
 
-
   @Rule
   public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
       MainActivity.class);
