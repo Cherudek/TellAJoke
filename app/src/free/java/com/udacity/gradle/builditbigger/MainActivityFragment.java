@@ -18,8 +18,7 @@ import com.google.android.gms.ads.MobileAds;
  */
 public class MainActivityFragment extends Fragment implements OnClickListener {
 
-     public View root;
-
+    public View root;
     private ProgressBar progressBar;
     private Button button;
 
@@ -31,6 +30,8 @@ public class MainActivityFragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
         Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_main, container, false);
+
+        progressBar = new ProgressBar(root.getContext());
 
         progressBar = root.findViewById(R.id.progress_bar);
         button = root.findViewById(R.id.btn_tell_joke);
@@ -50,19 +51,31 @@ public class MainActivityFragment extends Fragment implements OnClickListener {
 
         progressBar.setVisibility(View.INVISIBLE);
 
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                progressBar.setVisibility(View.VISIBLE);
+
+                EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(getContext(), root);
+
+                endpointsAsyncTask.execute();
+
+//                Toast.makeText(getContext(), "The joke is on its way hold on tight!", Toast.LENGTH_SHORT)
+//                    .show();
+
+            }
+        });
+
         return root;
 
     }
 
+
     @Override
     public void onClick(View v) {
 
-        button.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
 
-            }
-        });
     }
+
 }

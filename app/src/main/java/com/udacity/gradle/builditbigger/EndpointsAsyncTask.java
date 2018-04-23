@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.util.Pair;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import com.example.androiddisplayjokeslibrary.DisplayJokeActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -20,7 +22,17 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
   private static MyApi myApiService = null;
 
+  public View mView;
+
   public Context mContext;
+  private ProgressBar progressBar;
+
+
+  public EndpointsAsyncTask(Context context, View view) {
+    this.mContext = context;
+    this.mView = view;
+
+  }
 
   @Override
   protected String doInBackground(Pair<Context, String>... params) {
@@ -53,8 +65,13 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     }
   }
 
-  public EndpointsAsyncTask(Context context) {
-    this.mContext = context;
+  @Override
+  protected void onPreExecute() {
+    super.onPreExecute();
+
+    progressBar = mView.findViewById(R.id.progress_bar);
+
+    progressBar.setVisibility(View.VISIBLE);
 
   }
 
@@ -73,9 +90,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
         intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, mResult);
         mContext.startActivity(intent);
 
+        progressBar.setVisibility(View.INVISIBLE);
 
       }
-    }, 5000);
+    }, 3000);
 
 
   }

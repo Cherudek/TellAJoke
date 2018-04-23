@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import com.example.androiddisplayjokeslibrary.DisplayJokeActivity;
 import com.udacity.gradle.builditbigger.EndpointsAsyncTask.AsyncTaskCallback;
 
@@ -18,6 +17,8 @@ public class MainActivity extends AppCompatActivity implements
 
     private String MAIN_ACTIVITY_LOG_TAG = MainActivity.class.getName();
     public Context mContext;
+    public View mView;
+
     AsyncTaskCallback asyncTaskCallback = new AsyncTaskCallback() {
         @Override
         public void callBack(String joke) {
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
+
     @Override
     public void callBack(String joke) {
 
@@ -67,18 +69,6 @@ public class MainActivity extends AppCompatActivity implements
         asyncTaskCallback.callBack(joke);
 
         Log.i(MAIN_ACTIVITY_LOG_TAG, "TEST *** The Joke is: " + joke);
-
-
-    }
-
-    public void tellJoke(View view) {
-
-        EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(mContext);
-
-        endpointsAsyncTask.execute();
-
-        Toast.makeText(this, "The joke is on its way hold on tight!", Toast.LENGTH_SHORT)
-            .show();
 
 
     }
