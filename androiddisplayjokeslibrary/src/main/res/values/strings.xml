@@ -1,5 +1,4 @@
 <resources>
   <string name="app_name">Android Display Jokes Library</string>
   <string name="title_activity_display_joke_activity">DisplayJokeActivity</string>
-  <string name="here_s_my_joke">Here\'s My Joke!</string>
 </resources>

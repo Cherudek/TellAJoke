@@ -3,7 +3,6 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.support.v4.util.Pair;
 import android.util.Log;
 import android.view.View;
@@ -78,11 +77,6 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
   @Override
   protected void onPostExecute(final String mResult) {
 
-    //Add a 3 second delay before showing the result
-    new Handler().postDelayed(new Runnable() {
-      @Override
-      public void run() {
-
         Log.i(LOG_TAG, " TEST **** The Joke Retrieved is: " + mResult);
 
         Intent intent = new Intent(mContext, DisplayJokeActivity.class);
@@ -91,10 +85,6 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
         mContext.startActivity(intent);
 
         progressBar.setVisibility(View.INVISIBLE);
-
-      }
-    }, 3000);
-
 
   }
 
