@@ -171,6 +171,6 @@ Once you have a functioning project, consider adding more features to test your 
 App Screen Shots
 -------
 
-![Main Activity](https://cherudek.github.io/TellAJoke/HomeActivity.png "Home Activity Screenshot")
+![Main Activity](https://cherudek.github.io/TellAJoke/BuildItBigger1.png "Home Activity Screenshot")
 
-![Show Joke Activity](https://cherudek.github.io/TellAJoke/ShowJokeActivity.png "Show Joke Activity Screenshot")
+![Show Joke Activity](https://cherudek.github.io/TellAJoke/BuildItBigger2.png "Show Joke Activity Screenshot")
