@@ -56,7 +56,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     }
 
     try {
-      String joke = String.valueOf(myApiService.sayHi().execute().getData());
+      String joke = String.valueOf(myApiService.giveMeAJoke().execute().getData());
       Log.i(LOG_TAG, " TEST**** The Joke Retrieved is: " + joke);
 
       return joke;
