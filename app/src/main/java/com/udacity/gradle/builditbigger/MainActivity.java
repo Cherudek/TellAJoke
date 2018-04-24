@@ -13,37 +13,25 @@ public class MainActivity extends AppCompatActivity implements
     AsyncTaskCallback {
 
   public Context mContext;
-  AsyncTaskCallback asyncTaskCallback = new AsyncTaskCallback() {
-    @Override
-    public void callBack(String joke) {
+  public AsyncTaskCallback asyncTaskCallback = this;
 
-    }
-  };
   private String MAIN_ACTIVITY_LOG_TAG = MainActivity.class.getName();
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
     mContext = getApplicationContext();
 
   }
 
   @Override
   public void callBack(String joke) {
-
     Intent intent = new Intent(this, DisplayJokeActivity.class);
     intent.putExtra(DisplayJokeActivity.JOKE_INTENT_TAG, joke);
     this.startActivity(intent);
-
     asyncTaskCallback.callBack(joke);
 
     Log.i(MAIN_ACTIVITY_LOG_TAG, "TEST *** The Joke is: " + joke);
-
-
   }
-
-
 }
